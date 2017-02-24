@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        body{
+            margin:0;padding: 0;
+        }
+            #cas{
+                /*background: red;*/
+                position:absolute;
+                /*top:70px;
+                left:250px;*/
+                /*margin:50px 0 0 200px;*/
+            }
+            #color{
+                background: red;
+                width: 200px;
+                height: 200px;
+                position:absolute;
+            }
+        </style>
+    </head>
+    <body>
+    <canvas id="cas"></canvas>
+    <div id = "color"></div>
+    <script>
+        var cas = document.getElementById('cas');
+        var color = document.getElementById('color');
+        //给cas设置宽高位置
+        cas.width=900;
+        cas.height=537;
+        cas.style.left=(document.documentElement.clientWidth-cas.offsetWidth)/2+'px';
+        cas.style.top=(document.documentElement.clientHeight-cas.offsetHeight)/2+'px';
+        //给颜色按钮的框定位
+        color.style.right=5+'px';
+        color.style.bottom=5+'px';
+        //创建二维画布
+        var gs = cas.getContext('2d');
+        changebg('bg.jpg');//调用加背景的函数
+        painting(gs);//调用绘画函数
+
+        //加背景
+        function changebg(img1){
+            var img = new Image();console.log(Image)
+            img.onload = function () {
+                draw(this);
+            }
+            img.src = img1;
+            function draw(obj) {
+                var bg = gs.createPattern(obj,'no-repeat');
+                gs.fillStyle = bg;
+                gs.fillRect(0,0, cas.offsetWidth, cas.offsetHeight);
+            } 
+        }
+         
+        //绘画函数
+        function painting(goal){
+            cas.onmousedown=function(e){
+                var l = e.layerX;
+                var t = e.layerY;
+                goal.moveTo(l, t);
+                cas.onmousemove=function(e){
+                    var x = e.layerX;
+                    var y = e.layerY;
+                    goal.lineTo(x,y);
+                    goal.stroke();
+                    // goal.beginPath();
+                    // goal.lineTo(x,y);
+                    // goal.stroke();
+                }
+                cas.onmouseup=function(){
+                    cas.onmousemove=cas.onmouseup=null;
+                }
+                return false;
+            }
+        }
+        
+        //色板
+        
+    </script>
+
+    </body>
+</html>

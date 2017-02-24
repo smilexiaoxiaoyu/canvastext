@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        body{
+            margin:0;
+            padding:0;
+            background: #ccc;
+        }
+        #canvas{
+            background: #eee;
+            /*opacity: 0.3;*/
+        }
+        </style>
+    </head>
+    <body>
+    <canvas id="canvas"></canvas>
+    <audio src="1.wav" id="audio"></audio>
+    <script>
+         var canvas = document.getElementById('canvas');
+         var audio = document.getElementById('audio');
+         canvas.width=500;
+         canvas.height=500;
+         canvas.background
+         var cobj = canvas.getContext("2d");
+         //指定起始的圆的圆心的位置以及半径
+         var originx=200;//圆心x
+         var originy=200;//圆心y
+         var radius=100;//大圆半径
+
+         
+
+         circle(radius,8,'#fff');//画圆盘 半径，边框宽度,圆心处的颜色
+         circle(6,1,'#885103');//小圆
+         drawMark ();//画刻度
+         //获取时间及指针角度
+        var date = new Date();
+        var h = date.getHours()*30+(date.getMinutes()*6/12)-90;
+        var m = date.getMinutes()*6-90;
+        var s = date.getSeconds()*6-90;
+        drawPointer(2,'#03d7d0',70,s);//秒针，指针宽度，指针颜色，长度，角度
+        drawPointer(3,'#1807fd',60,m);//分针
+        drawPointer(4,'#666',45,h);//分针
+         
+         //设置音乐播放的时间，在哪一段
+        audio.ontimeupdate=function(){//当音频播放位置发生改变时触发
+            if(audio.currentTime>=0.02){//当播放时间大于0.2秒时
+                audio.pause();//暂停此音频
+            }
+        }
+        //设置时间定时器，使表开始走动
+         setInterval(function(){
+            audio.play();//调用音频
+            audio.currentTime=0;//从0开始播放
+            cobj.clearRect(0,0,500,500);//清楚一下画布，再重新画
+            circle(radius,8,'#fff');//画圆盘 半径，边框宽度,圆心处的颜色
+            circle(6,1,'#885103');//小圆
+            drawMark ();//画刻度
+            //获取时间及指针角度
+             var date = new Date();
+             var h = date.getHours()*30+(date.getMinutes()*6/12)-90;
+             var m = date.getMinutes()*6-90;
+             var s = date.getSeconds()*6-90;
+            drawPointer(2,'#03d7d0',70,s);//秒针，指针宽度，指针颜色，长度，角度
+            drawPointer(3,'#1807fd',60,m);//分针
+            drawPointer(4,'#666',45,h);//分针
+         }, 1000)
+
+         //画圆的函数
+         function circle(radius,n,color){
+             //阴影
+             cobj.shadowColor="#e3a0be";
+             cobj.shadowOffsetX=1;
+             cobj.shadowOffsetY=1;
+             cobj.shadowBlur=3;
+             //填颜色渐变色
+             var colorObj = cobj.createRadialGradient(originx, originy, 1, originx, originy, 100);
+             colorObj.addColorStop(0, color);
+             colorObj.addColorStop(0.6, "#fcaac7");
+             colorObj.addColorStop(1, "#fc5fa9");
+             cobj.fillStyle=colorObj;
+             cobj.strokeStyle=colorObj;//边框加颜色
+             cobj.lineWidth=n;//设置边框的宽度
+             //画圆
+             cobj.beginPath();
+             cobj.arc(originx, originy, radius, 0, 2*Math.PI, false);
+             cobj.stroke();
+             cobj.fill();//可填充颜色
+         }
+         
+         //画刻度
+         function drawMark (){
+             for (var i = 0; i < 60; i++) {
+                var angle = i*6*Math.PI/180;//弧度
+                var len = radius-6;//表盘
+                if(i%5==0){
+                    len=radius-12;
+                }
+                
+                cobj.beginPath();
+                cobj.strokeStyle='#fff';
+                cobj.lineWidth=3;
+                cobj.moveTo(originx+radius*Math.cos(angle),originy+radius*Math.sin(angle));
+                cobj.lineTo(originx+(len)*Math.cos(angle),originy+(len)*Math.sin(angle));
+                cobj.stroke();
+             
+             };
+         }
+        
+        //画针的函数
+        function drawPointer(width,color,len,angle){
+            cobj.lineWidth=width;
+            cobj.strokeStyle=color;
+            cobj.beginPath();
+            cobj.moveTo(originx, originy);
+            cobj.lineTo(originx+len*Math.cos(angle*Math.PI/180), originy+len*Math.sin(angle*Math.PI/180));
+            cobj.stroke();
+         }
+    </script>
+    </body>
+        
+</html>

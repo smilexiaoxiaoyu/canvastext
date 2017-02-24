@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        #cas{
+            background: #666;
+        }
+    </style>
+    <body>
+    <canvas id="cas" ></canvas>
+    <script>
+        var cas =document.getElementById('cas');
+        cas.width=document.documentElement.clientWidth-2.5;
+        cas.height=document.documentElement.clientHeight-2.5;
+        //创建环境
+        var gs = cas.getContext("2d");console.log(gs)
+        //实心方块加颜色
+        gs.strokeStyle='red';
+        //边框宽度
+        gs.lineWidth=2;
+        //实心方块设置位置和大小
+        gs.strokeRect(100, 100, 500, 300);
+
+    </script>
+    </body>
+</html>

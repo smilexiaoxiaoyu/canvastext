@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+        #canvas{
+            /*width: 500px;*/
+            /*height: 500px;*/
+            /*margin: 100px ;*/
+            background: #ccc;
+        }
+        </style>
+    </head>
+    <body>
+    <canvas id="canvas"></canvas>
+    <script>
+    var canvas = document.getElementById('canvas');
+    canvas.width=document.documentElement.clientWidth-2.5;
+    canvas.height=document.documentElement.clientHeight-2.5;
+    var cobj = canvas.getContext("2d");
+    // cobj.beginPath();
+    cobj.moveTo(300, 100);
+    // cobj.quadraticCurveTo(80, 10, 180, 30);
+    // cobj.stroke();
+   o
+    // 
+    // 
+    // cobj.lineTo(400, 100);
+    // cobj.arcTo(500,100,500,300,50);
+    // cobj.lineTo(500, 400);
+    // cobj.stroke();
+    
+
+    </script>
+    </body>
+</html>

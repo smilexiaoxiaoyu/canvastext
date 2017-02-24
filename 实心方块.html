@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        #cas{
+            background: #cafaa0;
+        }
+    </style>
+    <body>
+    <canvas id="cas" ></canvas>
+    <script>
+        var cas =document.getElementById('cas');
+        cas.width=document.documentElement.clientWidth-2.5;
+        cas.height=document.documentElement.clientHeight-2.5;
+        //创建环境
+        var gs = cas.getContext("2d");
+         //颜色渐变
+        var cb = gs.createLinearGradient(100,100, 600, 100)
+            cb.addColorStop(0,'red');
+            cb.addColorStop(0.2,'#fec824');
+            cb.addColorStop(0.4,'yellow');
+            cb.addColorStop(0.6,'green');
+            cb.addColorStop(0.8,'blue');
+            cb.addColorStop(0.9,'#9a4db0');
+            cb.addColorStop(1,'#e616d0');
+        //实心方块加颜色
+        gs.fillStyle=cb;
+        //阴影
+        gs.shadowColor='#666';
+        gs.shadowOffsetX=10;
+        gs.shadowOffsetY=10;
+        gs.shadowBlur=20;
+       
+        //实心方块设置位置和大小
+        gs.fillRect(100, 100, 500, 300);
+
+    </script>
+    </body>
+</html>

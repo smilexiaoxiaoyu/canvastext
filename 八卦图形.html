@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                margin:0;
+                padding:0;
+            }
+            #cas{
+                background: #999;
+                position:absolute;
+            }
+        </style>
+    </head>
+    <body>
+    <canvas id="cas"></canvas>
+    <script>
+    var cas = document.getElementById('cas');
+    cas.width = document.documentElement.clientWidth/2.2;
+    cas.height = document.documentElement.clientHeight/1.5;
+    cas.style.top = document.documentElement.clientHeight/6+'px';
+    cas.style.left = document.documentElement.clientWidth/4+'px'; 
+    var cs = cas.getContext("2d");
+    // cs.fillStyle='#fff';
+    cs.beginPath();
+    cs.arc(300, 200, 100, -1/2*Math.PI, 1/2*Math.PI, false);
+    cs.fillStyle="#fff";
+    cs.fill();
+
+    cs.beginPath();
+    cs.arc(300, 200, 100, 1/2*Math.PI, 3/2*Math.PI, false);
+    cs.fillStyle="#000";
+    cs.fill();
+
+    cs.beginPath();
+    cs.arc(300, 250, 50, 3/2*Math.PI, 1/2*Math.PI, false);
+    cs.fillStyle="#000";
+    cs.fill();
+
+    cs.beginPath();
+    cs.arc(300, 150, 50, 1/2*Math.PI, 3/2*Math.PI, false);
+    cs.fillStyle="#fff";
+    cs.fill();
+
+    cs.beginPath();
+    cs.arc(300, 150, 10, 0, 2*Math.PI, false);
+    cs.fillStyle="#000";
+    cs.fill();
+
+    cs.beginPath();
+    cs.arc(300, 250, 10, 0, 2*Math.PI, false);
+    cs.fillStyle="#fff";
+    cs.fill();
+
+    cs.save();
+    cs.fillStyle='#fff';
+    // cs.globalAlpha=0.4;
+    cs.font="32px 楷体";
+    cs.textAlign="start";
+    cs.shadowColor="rgba(0,0,0,0.4)";
+    cs.shadowOffsetX=15;
+    cs.shadowOffsetY=8;
+    cs.shadowBlur=2;
+    cs.fillText('太极图', 250, 60);
+    cs.restore();
+    </script>
+    </body>
+</html>

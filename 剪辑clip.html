@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        #myCanvas{
+            background:#ccc;
+        }
+        .div{
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+            position:absolute;
+            z-index: 20;
+        }
+        </style>
+    </head>
+    <body>
+    <canvas id = "myCanvas"></canvas>
+    <script>
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+    /*// 剪切矩形区域
+    // ctx.fillStyle="green";
+    ctx.rect(0,0,200,120);
+    ctx.stroke();
+    // ctx.clip();
+    // 在 clip() 之后绘制绿色矩形
+    // ctx.fillStyle="red";
+    ctx.clearRect(0,0,150,100);*/
+
+
+    // // 剪切矩形区域
+    // ctx.rect(50,20,200,120);
+    // ctx.stroke();
+    // ctx.clip();
+    // // 在 clip() 之后绘制绿色矩形
+    // ctx.fillStyle="green";
+    // ctx.fillRect(10,10,100,100);
+    
+    //画个三角形
+    ctx.strokeStyle='green';
+    ctx.lineWidth=3;
+    ctx.beginPath();
+    ctx.lineTo(20, 0);
+    ctx.lineTo(20, 150);
+    ctx.lineTo(100, 30);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    //擦
+    c.onmousedown=function(e){
+        var x = e.clientX-10;
+        var y = e.clientY-10;
+        //生成div橡皮擦
+        var div = document.createElement('div');
+        div.className='div';
+        document.body.appendChild(div);
+        div.style.left=x+'px';
+        div.style.top=y+'px';
+        document.onmousemove=function(e){
+            var l = e.clientX-10;
+            var t = e.clientY-10;
+            // console.log(l,t)
+            div.style.left=l+'px';
+            div.style.top=t+'px';
+            ctx.beginPath();
+            ctx.strokeStyle='';
+            ctx.lineWidth=3;
+            ctx.fillStyle="";
+            ctx.arc(l, t, 10, 0, 2*Math.PI, false);
+            ctx.stroke();
+            ctx.clip();
+            ctx.fillStyle="#666";
+            ctx.fillRect(l,t,20,20);
+        }
+       document.onmouseup=function(){
+            document.body.removeChild(div);
+            document.onmousemove=document.onmouseup=null;
+        }
+        return false;
+    }
+    /*arr=[1,2,3]
+    console.log(arr.map(parseInt))*/
+    </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+     <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        #cas{
+            background: #cafaa0;
+        }
+    </style>
+    </head>
+    <body>
+    <canvas id = "cas"></canvas>
+    <script>
+     var cas =document.getElementById('cas');
+     cas.width=document.documentElement.clientWidth-2.5;
+     cas.height=document.documentElement.clientHeight-2.5;
+     var gs = cas.getContext("2d");
+     
+     var num=0;
+     var time=null;
+
+     gs.strokeStyle='green';
+     gs.lineWidth=4;
+     // gs.arc(500, 500, 100, 0, 2*Math.PI, false);
+     //gs.fill();
+     // gs.stroke();
+
+     time=setInterval(function(){
+        num++;
+        gs.arc(200, 200, 100,-num/180*Math.PI, -(num-1)/180*Math.PI, false);
+        console.log(num)
+        gs.stroke();
+        if(num==360){
+            clearInterval(time);
+        }
+        // console.log(num)
+     }, 100)
+    </script>
+    </body>
+</html>

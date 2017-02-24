@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+        body{
+            margin:0;
+            padding: 0;
+        }
+        #cas{
+            background: #666;
+        }
+    </style>
+    <body>
+    <canvas id="cas" ></canvas>
+    <script>
+        var cas =document.getElementById('cas');
+        cas.width=document.documentElement.clientWidth-2.5;
+        cas.height=document.documentElement.clientHeight-2.5;
+        //创建环境
+        var gs = cas.getContext("2d");
+        //实心方块加颜色
+        gs.strokeStyle='red';
+        //边框宽度
+        gs.lineWidth=3;
+        gs.beginPath();//闭合的开始
+        gs.moveTo(100, 100);
+        gs.lineTo(400, 400);
+        gs.lineTo(200,400);
+        gs.closePath();
+        gs.stroke();//开始画
+        gs.beginPath();//重置当前路径
+        gs.lineTo(100, 200);
+        gs.lineTo(800,200);
+        gs.lineTo(900,600);
+        // gs.closePath();
+        gs.stroke();
+    </script>
+    </body>
+</html>
